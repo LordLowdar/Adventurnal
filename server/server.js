@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path'); // Import `authMiddleware()` function to be configured with the Apollo Server
+require('dotenv').config();
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
