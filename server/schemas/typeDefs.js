@@ -18,6 +18,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     race: String
+    class: String
     level: Int
   }
 
