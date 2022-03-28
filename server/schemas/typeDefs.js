@@ -6,8 +6,9 @@ const typeDefs = gql`
     email: String
     characters: [Character]
   }
-
+// Do we need Journal entries in the journal?
   type Journal {
+    _id: ID
     title: String
     session: String
     contents: String
@@ -18,7 +19,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     race: String
-    class: String
+    className: String
     level: Int
   }
 
@@ -43,7 +44,7 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
-    addCharacter(name: String!, race: String!, level: Int): Character
+    addCharacter(name: String!, race: String!, className: String!, level: Int): Character
 
     addJournal(
       title: String!
