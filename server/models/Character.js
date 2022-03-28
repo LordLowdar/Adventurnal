@@ -9,6 +9,10 @@ const characterSchema = new Schema({
     type: String,
     required: true,
   },
+  class: {
+    type: String,
+    required: true,
+  },
   level: {
     type: Number,
     required: true,
