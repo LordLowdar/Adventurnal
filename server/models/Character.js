@@ -9,7 +9,7 @@ const characterSchema = new Schema({
     type: String,
     required: true,
   },
-  class: {
+  className: {
     type: String,
     required: true,
   },
