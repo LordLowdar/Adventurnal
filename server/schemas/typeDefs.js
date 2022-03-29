@@ -6,7 +6,6 @@ const typeDefs = gql`
     email: String
     characters: [Character]
   }
-// Do we need Journal entries in the journal?
   type Journal {
     _id: ID
     title: String

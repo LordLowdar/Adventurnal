@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config();
 const { typeDefs, resolvers } = require('./schemas');
 // Import `authMiddleware()` function to be configured with the Apollo Server
-const { authMiddleware } = require('../utils/auth');
+const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
