@@ -8,6 +8,7 @@ const typeDefs = gql`
   }
 
   type Journal {
+    id: ID
     title: String
     session: String
     contents: String
@@ -18,6 +19,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     race: String
+    class: String
     level: Int
   }
 
