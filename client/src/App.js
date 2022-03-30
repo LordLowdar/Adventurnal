@@ -9,7 +9,11 @@ import {
 
 import { setContext } from '@apollo/client/link/context';
 
+import { Provider } from 'react-redux';
+
 import Home from './pages/Home';
+import Login from './pages/Login'
+import SignUp from './pages/Signup'
 import NoMatch from './pages/NoMatch';
 
 const httpLink = createHttpLink({
@@ -33,11 +37,21 @@ const client = new ApolloClient({
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <header>
+                    <Link to="/">Home</Link>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Signup</Link>
+        </header>
+
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<SignUp />} />
+        </Routes>
+        </BrowserRouter>
+    </ApolloProvider>
   );
-};
+}
 
