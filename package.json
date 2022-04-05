@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/LordLowdar/Adventurnal#readme",
   "dependencies": {
-    "concurrently": "^7.0.0"
+    "bcrypt": "^5.0.1",
+    "concurrently": "^7.0.0",
+    "mongoose": "^6.2.9"
   }
 }
