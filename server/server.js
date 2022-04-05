@@ -7,7 +7,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 async function startApollo() {
@@ -24,8 +24,11 @@ async function startApollo() {
 }
 startApollo();
 
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use('/public', express.static(path.join(__dirname, '../client/public')));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));

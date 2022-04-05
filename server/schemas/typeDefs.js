@@ -1,79 +1,54 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type User {
+
+type User {
     _id: ID
+    firstName: String
+    lastName: String
     email: String
-    characters: [Character]
-  }
-  type Journal {
-    _id: ID
-    title: String
-    session: String
-    contents: String
-    tags: String
+    username: String
+    specialty: [Specialty]
+    postings: [Posting]
   }
 
-  type Character {
+  type Specialty {
     _id: ID
     name: String
-    race: String
-    className: String
-    level: Int
+    users: [User]
+    postings: [Posting]
+  }
+  type Posting {
+    _id: ID
+    title: String
+    description: String
+    user: [User]
+    collaborators: [User]
+    seeking: [Specialty]
+  }
+
+  type Checkout {
+    session: ID
   }
 
   type Auth {
-    token: ID!
+    token: ID
     user: User
   }
 
   type Query {
-    users: [User]!
-    user(userId: ID!): User
-    me: User
-    characters(userId: ID!): [Character]
-    journals(characterId: ID!): [Journal]
-    currentCharacters: [Character]
-    character(characterId: ID!): Character
-    journal(journalId: ID!): Journal
+    user: User
+    users: [User]
+    posting: Posting
+    postings: [Posting]
+    specialty: Specialty
+    specialties: [Specialty]
   }
 
   type Mutation {
-    addUser(email: String!, password: String!): Auth
-
+    addUser(firstName: String!, lastName: String!, username: String! email: String!, password: String! specialty: Int!): Auth
+    updateUser(firstName: String, lastName: String, username: String email: String, password: String specialty: Int): User
     login(email: String!, password: String!): Auth
-
-    addCharacter(name: String!, race: String!, className: String!, level: Int): Character
-
-    addJournal(
-      title: String!
-      session: String!
-      contents: String!
-      tags: [String]
-    ): Journal
-
-    removeUser(userId: ID!): User
-
-    removeCharacter(characterId: ID!): Character
-
-    removeJournal(journalId: ID!): Journal
-
-    updateUser(email: String, password: String): User
-
-    updateCharacter(
-      characterId: ID!
-      name: String
-      race: String
-      level: Int
-    ): Character
-
-    updateJournal(
-      journalId: ID!
-      title: String
-      session: String
-      contents: String
-      tags: [String]
-    ): Journal
   }
 `;
 
