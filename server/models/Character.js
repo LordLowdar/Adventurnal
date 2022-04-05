@@ -18,7 +18,7 @@ const characterSchema = new Schema({
     required: true,
     default: 1,
   },
-  journals: [{ type: mongooseSchema.Types.ObjectId, ref: 'Journal' }],
+  journals: [{ type: Schema.Types.ObjectId, ref: 'Journal' }],
 });
 
 const Character = model('Character', characterSchema);

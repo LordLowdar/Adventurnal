@@ -13,7 +13,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    characters: [{ type: mongooseSchema.Types.ObjectId, ref: 'Character' }],
+    characters: [{ type: Schema.Types.ObjectId, ref: 'Character' }],
   },
   // set this to use virtual below
   {
