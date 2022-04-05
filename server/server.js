@@ -15,7 +15,7 @@ async function startApollo() {
     typeDefs,
     resolvers,
     // Add context to our server so data from the `authMiddleware()` function can pass data to our resolver functions
-    context: authMiddleware,
+    // context: authMiddleware,
   });
 
   await server.start();
