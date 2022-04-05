@@ -43,7 +43,12 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
-    addCharacter(name: String!, race: String!, className: String!, level: Int): Character
+    addCharacter(
+      name: String!
+      race: String!
+      className: String!
+      level: Int
+    ): Character
 
     addJournal(
       title: String!
