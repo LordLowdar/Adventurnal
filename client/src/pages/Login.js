@@ -1,70 +1,70 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
-import Auth from '../utils/auth';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 
-function Login(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error }] = useMutation(LOGIN);
+export default function LoginPage() {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || '/';
+  const [loginCredentials, setCredentials] = useState({
+    email: '',
+    password: '',
+  });
+  const [login, { error, data, loading }] = useMutation(LOGIN);
+  const onChange = (e) =>
+    setCredentials({ ...loginCredentials, [e.target.name]: e.target.value });
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const mutationResponse = await login({
-        variables: { email: formState.email, password: formState.password },
+  const loginProcess = async () => {
+    if (loginCredentials.email && loginCredentials.password) {
+      const { email, password } = loginCredentials;
+      const { data } = await login({
+        variables: {
+          email,
+          password,
+        },
       });
-      const token = mutationResponse.data.login.token;
-      Auth.login(token);
-    } catch (e) {
-      console.log(e);
+      if (data.login.user._id) {
+        navigate(from, { replace: true });
+      }
     }
   };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
   return (
-    <div className="container my-1">
-
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremail@test.com"
-            name="email"
-            type="email"
-            id="email"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="flex-row space-between my-2">
-          <label htmlFor="pwd">Password:</label>
-          <input
-            placeholder="******"
-            name="password"
-            type="password"
-            id="pwd"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-text">The provided credentials are incorrect</p>
+    <div className="base">
+      <div className="loginHeader">Login</div>
+      <div className="content">
+        <div className="loginForm">
+          <div className="form-group">
+            <label className="emailTitle" htmlFor="email">
+              Email:
+            </label>
+            <input
+              onChange={onChange}
+              type="text"
+              name="email"
+              value={loginCredentials.email}
+              placeholder="Email"
+            />
           </div>
-        ) : null}
-        <div className="flex-row flex-end">
-          <button type="submit">Submit</button>
+          <div className="form-group">
+            <label className="passwordTitle" htmlFor="password">
+              Password:
+            </label>
+            <input
+              onChange={onChange}
+              type="password"
+              name="password"
+              value={loginCredentials.password}
+              placeholder="Password"
+            />
+          </div>
         </div>
-      </form>
+      </div>
+      <div className="loginFooter">
+        <button type="submit" onClick={loginProcess} className="btn">
+          Login
+        </button>
+      </div>
     </div>
   );
 }
-
-export default Login;
