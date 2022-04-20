@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button'
 import Auth from '../utils/auth';
-
 function Login(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
@@ -31,7 +32,9 @@ function Login(props) {
 
   return (
     <div className="container my-1">
-
+      <Button>
+        I am a button
+      </Button>
       <h2>Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
@@ -64,6 +67,7 @@ function Login(props) {
         </div>
       </form>
     </div>
+    
   );
 }
 
