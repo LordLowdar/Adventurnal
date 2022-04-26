@@ -12,17 +12,40 @@ export const LOGIN = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser(
-    $email: String!
-    $password: String!
-  ) {
-    addUser(
-      email: $email
-      password: $password
-    ) {
+  mutation addUser($email: String!, $password: String!) {
+    addUser(email: $email, password: $password) {
       token
       user {
         _id
+      }
+    }
+  }
+`;
+
+export const ADD_CHARACTER = gql`
+  mutation addCharacter(
+    $name: String!
+    $race: String!
+    $className: String!
+    $level: Int
+  ) {
+    addCharacter(
+      name: $name
+      race: $race
+      className: $className
+      level: $level
+    ) {
+      _id
+      name
+      race
+      className
+      level
+      journals {
+        _id
+        title
+        session
+        contents
+        tags
       }
     }
   }
