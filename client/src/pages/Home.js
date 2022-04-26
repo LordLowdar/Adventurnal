@@ -1,10 +1,11 @@
 import React from "react";
-
+import Button from '@mui/material/Button'
 
 const Home = () => {
   return (
     <div className="container">
-      WELCOME TO ADVENTURNAL YO!!
+      <Button variant="text">Text</Button>
+      Welcome to Adventurnal, your tabletop campaign journal, upgraded.
     </div>
   );
 };
