@@ -12,9 +12,10 @@ import { setContext } from '@apollo/client/link/context';
 import { Provider } from 'react-redux';
 
 import Home from './pages/Home';
-import Login from './pages/Login'
-import SignUp from './pages/Signup'
+import Login from './pages/Login';
+import SignUp from './pages/Signup';
 import NoMatch from './pages/NoMatch';
+import Characters from './pages/Characters';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,18 +41,19 @@ export default function App() {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <header>
-                    <Link to="/">Home</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Signup</Link>
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
+          <Link to="character">Characters</Link>
         </header>
 
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/characters" element={<Characters />} />
         </Routes>
-        </BrowserRouter>
+      </BrowserRouter>
     </ApolloProvider>
   );
 }
-

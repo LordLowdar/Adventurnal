@@ -20,6 +20,7 @@ const typeDefs = gql`
     race: String
     className: String
     level: Int
+    journals: [Journal]
   }
 
   type Auth {
