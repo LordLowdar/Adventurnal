@@ -50,3 +50,10 @@ export const ADD_CHARACTER = gql`
     }
   }
 `;
+
+export const ADD_JOURNALENTRY = gql`
+  mutation addJournalEntry($characterId: ID!, $title: String!, $session: String!, $contents: String!, $tags: [String]) {
+    addJournalEntry(characterId: $characterID, title: $title, session: $session:, contents: $contents, tags: $tags) {
+    }
+  }
+`;

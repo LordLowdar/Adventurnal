@@ -51,7 +51,8 @@ const typeDefs = gql`
       level: Int
     ): Character
 
-    addJournal(
+    addJournalEntry(
+      characterId: ID!
       title: String!
       session: String!
       contents: String!

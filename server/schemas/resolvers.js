@@ -79,14 +79,19 @@ const resolvers = {
       // If user attempts to execute this mutation and isn't logged in, throw an error
       throw new AuthenticationError('You need to be logged in!');
     },
-    addJournal: async (parent, { title, session, contents, tags }, context) => {
+    addJournalEntry: async (
+      parent,
+      { characterId, title, session, contents, tags },
+      context
+    ) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
-      if (context.Character) {
+      if (context.User) {
         return Character.findOneAndUpdate(
           { _id: context.Character._id },
           {
             $set: {
               Journal: {
+                characterId: characterId,
                 title: title,
                 session: session,
                 contents: contents,
