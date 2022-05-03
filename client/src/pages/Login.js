@@ -24,6 +24,9 @@ export default function LoginPage() {
           password,
         },
       });
+      if (data.login.token) {
+        localStorage.setItem('id_token', data.login.token);
+      }
       if (data.login.user._id) {
         navigate(from, { replace: true });
       }
@@ -66,6 +69,5 @@ export default function LoginPage() {
         </button>
       </div>
     </div>
-    
   );
 }
