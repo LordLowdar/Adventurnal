@@ -13,7 +13,7 @@ async function startApollo() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    // context: authMiddleware,
+    context: authMiddleware,
   });
 
   await server.start();
@@ -22,8 +22,11 @@ async function startApollo() {
 }
 startApollo();
 
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use('/public', express.static(path.join(__dirname, '../client/public')));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
