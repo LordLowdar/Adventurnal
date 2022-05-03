@@ -44,7 +44,7 @@ export default function App() {
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link>
-          <Link to="character">Characters</Link>
+          <Link to="/characters">Characters</Link>
         </header>
 
         <Routes>
