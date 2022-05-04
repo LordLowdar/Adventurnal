@@ -40,12 +40,34 @@ export const ADD_CHARACTER = gql`
       race
       className
       level
-      journals {
+      journal {
         _id
         title
         session
         contents
         tags
+      }
+    }
+  }
+`;
+
+export const ADD_JOURNALENTRY = gql`
+  mutation addJournalEntry(
+    $characterId: ID!
+    $title: String!
+    $session: String!
+    $contents: String!
+    $tags: [String]
+  ) {
+    addJournalEntry(
+      characterId: $characterId
+      title: $title
+      session: $session
+      contents: $contents
+      tags: $tags
+    ) {
+      journal {
+        title
       }
     }
   }
