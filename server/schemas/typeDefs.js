@@ -6,7 +6,12 @@ const typeDefs = gql`
     email: String
     characters: [Character]
   }
+
   type Journal {
+    journal: [JournalEntry]
+  }
+
+  type JournalEntry {
     _id: ID
     title: String
     session: String
@@ -20,7 +25,7 @@ const typeDefs = gql`
     race: String
     className: String
     level: Int
-    journals: [Journal]
+    journal: [JournalEntry]
   }
 
   type Auth {
@@ -44,9 +49,15 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
-    addCharacter(name: String!, race: String!, className: String!, level: Int): Character
+    addCharacter(
+      name: String!
+      race: String!
+      className: String!
+      level: Int
+    ): Character
 
-    addJournal(
+    addJournalEntry(
+      characterId: ID!
       title: String!
       session: String!
       contents: String!
