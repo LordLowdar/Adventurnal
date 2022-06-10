@@ -85,12 +85,12 @@ const resolvers = {
       context
     ) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
-      if (context.User) {
-        return Character.findOneAndUpdate(
-          { _id: context.Character._id },
+      if (context.user) {
+        const character = Character.findOneAndUpdate(
+          { _id: characterId },
           {
-            $set: {
-              Journal: {
+            $push: {
+              journals: {
                 characterId: characterId,
                 title: title,
                 session: session,
@@ -104,6 +104,7 @@ const resolvers = {
             runValidators: true,
           }
         );
+        return { journal: character.journals };
       }
       // If user attempts to execute this mutation and isn't logged in, throw an error
       throw new AuthenticationError('You need to be logged in!');
