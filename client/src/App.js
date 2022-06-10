@@ -6,7 +6,7 @@ import {
   createHttpLink,
   ApolloProvider,
 } from '@apollo/client';
-
+import './App.css';
 import { setContext } from '@apollo/client/link/context';
 
 import { Provider } from 'react-redux';
@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import NoMatch from './pages/NoMatch';
 import Characters from './pages/Characters';
+import Journal from './pages/Journal';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -45,6 +46,7 @@ export default function App() {
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link>
           <Link to="/characters">Characters</Link>
+          <Link to="/journal">Journal</Link>
         </header>
 
         <Routes>
@@ -52,6 +54,8 @@ export default function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/characters" element={<Characters />} />
+          <Route path="/journal/:characterId" element={<Journal />} />
+          <Route exact path="/journal" element={<Journal />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
