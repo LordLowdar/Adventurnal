@@ -1,6 +1,6 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Journal, Character } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, JournalEntry, Character } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -16,7 +16,7 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 
@@ -35,14 +35,14 @@ const resolvers = {
 
       if (!user) {
         //We need to change these messages
-        throw new AuthenticationError('No profile with this email found!');
+        throw new AuthenticationError("No profile with this email found!");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
         //Change here as well
-        throw new AuthenticationError('Incorrect password!');
+        throw new AuthenticationError("Incorrect password!");
       }
 
       const token = signToken(user);
@@ -77,7 +77,7 @@ const resolvers = {
         return character;
       }
       // If user attempts to execute this mutation and isn't logged in, throw an error
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
     addJournalEntry: async (
       parent,
@@ -86,35 +86,35 @@ const resolvers = {
     ) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
-        const character = Character.findOneAndUpdate(
+        const journalEntry = await JournalEntry.create({
+          title,
+          session,
+          contents,
+          tags,
+        });
+        const character = await Character.findOneAndUpdate(
           { _id: characterId },
           {
             $push: {
-              journals: {
-                characterId: characterId,
-                title: title,
-                session: session,
-                contents: contents,
-                tags: tags,
-              },
+              journal: journalEntry,
             },
           },
           {
             new: true,
             runValidators: true,
           }
-        );
-        return { journal: character.journals };
+        ).populate("journal");
+        return { journal: character.journal };
       }
       // If user attempts to execute this mutation and isn't logged in, throw an error
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {
         return User.findOneAndDelete({ _id: context.user._id });
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
     // Make it so a logged in user can only remove a tier list from their own profile
     removeCharacter: async (parent, args, context) => {
@@ -125,7 +125,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
     // Allow a user to update their profile information, without changing tier list.
     updateUser: async (parent, { email, password }, context) => {
@@ -139,7 +139,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

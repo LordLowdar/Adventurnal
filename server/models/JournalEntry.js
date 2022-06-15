@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const journalSchema = new Schema({
+const journalEntrySchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -16,6 +16,6 @@ const journalSchema = new Schema({
   tags: [String],
 });
 
-const Journal = model('Journal', journalSchema);
+const JournalEntry = model("JournalEntry", journalEntrySchema);
 
-module.exports = Journal;
+module.exports = JournalEntry;

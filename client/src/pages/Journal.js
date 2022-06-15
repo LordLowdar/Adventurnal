@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_JOURNALENTRY } from '../utils/mutations';
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_JOURNALENTRY } from "../utils/mutations";
 import {
   useNavigate,
   useLocation,
   Navigate,
   useParams,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 const Journal = () => {
   const [journalDetails, setDetails] = useState({
-    title: '',
-    session: '',
-    contents: '',
+    title: "",
+    session: "",
+    contents: "",
     tags: [],
   });
   const [addJournalEntry, { error, data, loading }] =
@@ -27,7 +27,7 @@ const Journal = () => {
       journalDetails.session &&
       journalDetails.contents
     ) {
-      console.log('Click');
+      console.log("Click");
       const { title, session, contents, tags } = journalDetails;
       const { data } = await addJournalEntry({
         variables: {
