@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { ADD_USER } from '../utils/mutations';
+import React, { useState } from "react";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { ADD_USER } from "../utils/mutations";
 
 export default function RegisterPage() {
   let navigate = useNavigate();
   let location = useLocation();
-  let from = location.state?.from?.pathname || '/';
+  let from = location.state?.from?.pathname || "/";
   const [newCredentials, setCredentials] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [register, { error, data, loading }] = useMutation(ADD_USER);
   const onChange = (e) =>
@@ -26,6 +26,9 @@ export default function RegisterPage() {
           password,
         },
       });
+      if (data.addUser.token) {
+        localStorage.setItem("id_token", data.addUser.token);
+      }
       if (data.addUser.user._id) {
         navigate(from, { replace: true });
       }

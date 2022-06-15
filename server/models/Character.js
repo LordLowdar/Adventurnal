@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const characterSchema = new Schema({
   name: {
@@ -18,9 +18,9 @@ const characterSchema = new Schema({
     required: true,
     default: 1,
   },
-  journals: [{ type: Schema.Types.ObjectId, ref: 'Journal' }],
+  journal: [{ type: Schema.Types.ObjectId, ref: "JournalEntry" }],
 });
 
-const Character = model('Character', characterSchema);
+const Character = model("Character", characterSchema);
 
 module.exports = Character;
