@@ -17,6 +17,7 @@ import SignUp from './pages/Signup';
 import NoMatch from './pages/NoMatch';
 import Characters from './pages/Characters';
 import Journal from './pages/Journal';
+import Roster from './pages/Roster';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -47,6 +48,7 @@ export default function App() {
           <Link to="/signup">Signup</Link>
           <Link to="/characters">Characters</Link>
           <Link to="/journal">Journal</Link>
+          <Link to="/roster">Roster</Link>
         </header>
 
         <Routes>
@@ -56,6 +58,7 @@ export default function App() {
           <Route exact path="/characters" element={<Characters />} />
           <Route path="/journal/:characterId" element={<Journal />} />
           <Route exact path="/journal" element={<Journal />} />
+          <Route exact path="/roster" element={<Roster />} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
