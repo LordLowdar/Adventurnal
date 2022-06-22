@@ -1,6 +1,6 @@
-const { AuthenticationError } = require("apollo-server-express");
-const { User, JournalEntry, Character } = require("../models");
-const { signToken } = require("../utils/auth");
+const { AuthenticationError } = require('apollo-server-express');
+const { User, JournalEntry, Character } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -16,7 +16,7 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 
@@ -31,18 +31,18 @@ const resolvers = {
       return { token, user };
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).populate('characters');
 
       if (!user) {
         //We need to change these messages
-        throw new AuthenticationError("No profile with this email found!");
+        throw new AuthenticationError('No profile with this email found!');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
         //Change here as well
-        throw new AuthenticationError("Incorrect password!");
+        throw new AuthenticationError('Incorrect password!');
       }
 
       const token = signToken(user);
@@ -77,7 +77,7 @@ const resolvers = {
         return character;
       }
       // If user attempts to execute this mutation and isn't logged in, throw an error
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You need to be logged in!');
     },
     addJournalEntry: async (
       parent,
@@ -103,18 +103,18 @@ const resolvers = {
             new: true,
             runValidators: true,
           }
-        ).populate("journal");
+        ).populate('journal');
         return { journal: character.journal };
       }
       // If user attempts to execute this mutation and isn't logged in, throw an error
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You need to be logged in!');
     },
     // Set up mutation so a logged in user can only remove their profile and no one else's
     removeUser: async (parent, args, context) => {
       if (context.user) {
         return User.findOneAndDelete({ _id: context.user._id });
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You need to be logged in!');
     },
     // Make it so a logged in user can only remove a tier list from their own profile
     removeCharacter: async (parent, args, context) => {
@@ -125,7 +125,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You need to be logged in!');
     },
     // Allow a user to update their profile information, without changing tier list.
     updateUser: async (parent, { email, password }, context) => {
@@ -139,7 +139,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw new AuthenticationError("You need to be logged in!");
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

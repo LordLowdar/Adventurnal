@@ -6,8 +6,10 @@ export const LOGIN = gql`
       token
       user {
         _id
-        characters{
+        characters {
           name
+          className
+          level
         }
       }
     }
