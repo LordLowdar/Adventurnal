@@ -28,6 +28,10 @@ export default function LoginPage() {
         localStorage.setItem('id_token', data.login.token);
       }
       if (data.login.user._id) {
+        localStorage.setItem(
+          'characters',
+          JSON.stringify(data.login.user.characters)
+        );
         navigate(from, { replace: true });
       }
     }
