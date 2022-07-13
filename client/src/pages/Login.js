@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-
+import { Container, Card, Button, Typography, TextField } from '@mui/material';
 export default function LoginPage() {
   let navigate = useNavigate();
   let location = useLocation();
-  let from = location.state?.from?.pathname || '/';
+  let from = location.state?.from?.pathname || '/roster';
   const [loginCredentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -37,41 +37,27 @@ export default function LoginPage() {
     }
   };
   return (
-    <div className="base">
-      <div className="loginHeader">Login</div>
-      <div className="content">
-        <div className="loginForm">
-          <div className="form-group">
-            <label className="emailTitle" htmlFor="email">
-              Email:
-            </label>
-            <input
-              onChange={onChange}
-              type="text"
-              name="email"
-              value={loginCredentials.email}
-              placeholder="Email"
-            />
-          </div>
-          <div className="form-group">
-            <label className="passwordTitle" htmlFor="password">
-              Password:
-            </label>
-            <input
-              onChange={onChange}
-              type="password"
-              name="password"
-              value={loginCredentials.password}
-              placeholder="Password"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="loginFooter">
-        <button type="submit" onClick={loginProcess} className="btn">
-          Login
-        </button>
-      </div>
-    </div>
+    <Container>
+      <Card>
+        <Typography variant="h6">Login</Typography>
+        <TextField
+          onChange={onChange}
+          type="text"
+          name="email"
+          value={loginCredentials.email}
+          placeholder="Email"
+        />
+        <TextField
+          onChange={onChange}
+          type="password"
+          name="password"
+          value={loginCredentials.password}
+          placeholder="Password"
+        />
+        <Button type="submit" onClick={loginProcess}>
+          <Typography variant="h6">Login</Typography>
+        </Button>
+      </Card>
+    </Container>
   );
 }

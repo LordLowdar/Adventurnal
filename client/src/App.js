@@ -58,6 +58,7 @@ export default function App() {
           <Route path="/journal/:characterId" element={<Journal />} />
           <Route exact path="/journal" element={<Journal />} />
           <Route exact path="/roster" element={<Roster />} />
+          <Route path="/*" element={<NoMatch/>} />
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
