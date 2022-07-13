@@ -1,5 +1,6 @@
+import { useQuery } from '@apollo/client';
+import { ME } from '../utils/queries';
 import React, { useState } from 'react';
-import { LOGIN } from '../utils/mutations';
 
 const Roster = () => {
   // Get characters from login
@@ -7,9 +8,15 @@ const Roster = () => {
   // if a character gets created/deleted, manually add to cache or new query
   // Display character buttons?
   // redirect to ?
-  const [characters, setCharacters] = useState(
-    JSON.parse(localStorage.getItem('characters')) || []
-  );
+  // const [characters, setCharacters] = useState(
+  //   JSON.parse(localStorage.getItem('characters')) || []
+  // );
+  const { loading, data, error } = useQuery(ME, {
+    fetchPolicy: 'network-only',
+  });
+
+  const characters = data?.me.characters || [];
+  console.log(data);
   return (
     <div>
       <div>Roster</div>
