@@ -1,33 +1,37 @@
 import { useQuery } from '@apollo/client';
 import { ME } from '../utils/queries';
 import React, { useState } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link as RouterLink,
+} from 'react-router-dom';
+import { Container, Typography, Card, CardContent } from '@mui/material';
 
 const Roster = () => {
-  // Get characters from login
-  // Get characters from graphQL cache if revisiting the page
-  // if a character gets created/deleted, manually add to cache or new query
-  // Display character buttons?
-  // redirect to ?
-  // const [characters, setCharacters] = useState(
-  //   JSON.parse(localStorage.getItem('characters')) || []
-  // );
   const { loading, data, error } = useQuery(ME, {
-    fetchPolicy: 'network-only',
+    // fetchPolicy: 'network-only',
   });
+  if (loading) return 'Updating Characters';
+  if (error) return 'Critical failure, try again';
 
   const characters = data?.me.characters || [];
   console.log(data);
   return (
-    <div>
-      <div>Roster</div>
-      <div>
-        <ul>
-          {characters.map((char) => {
-            return <li>{char.name}</li>;
-          })}
-        </ul>
-      </div>
-    </div>
+    <Container>
+      <Typography>Roster</Typography>
+      {characters.map((char) => {
+        return (
+          <Card>
+            <Typography component={RouterLink} to="/journal">
+              The tale of {char.name} The level {char.level} {char.race}{' '}
+              {char.className}
+            </Typography>
+          </Card>
+        );
+      })}
+    </Container>
   );
 };
 
