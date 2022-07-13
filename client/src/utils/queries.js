@@ -6,7 +6,11 @@ export const ME = gql`
       _id
       email
       characters {
+        _id
         name
+        race
+        className
+        level
       }
     }
   }
