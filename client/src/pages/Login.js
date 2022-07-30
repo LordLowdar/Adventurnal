@@ -32,7 +32,8 @@ export default function LoginPage() {
           'characters',
           JSON.stringify(data.login.user.characters)
         );
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
+        window.location.assign('/roster');
       }
     }
   };

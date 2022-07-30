@@ -7,20 +7,28 @@ import {
   Routes,
   Link as RouterLink,
 } from 'react-router-dom';
-import { Container, Typography, Card, CardContent } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+} from '@mui/material';
 
 const Roster = () => {
-  const { loading, data, error } = useQuery(ME, {
-    // fetchPolicy: 'network-only',
-  });
+  const { loading, data, error } = useQuery(ME, {});
   if (loading) return 'Updating Characters';
-  if (error) return 'Critical failure, try again';
+  if (error) return 'Crit failure, try again';
 
   const characters = data?.me.characters || [];
   console.log(data);
   return (
     <Container>
       <Typography>Roster</Typography>
+      <Button component={RouterLink} to="/characters">
+        {' '}
+        Create Character
+      </Button>
       {characters.map((char) => {
         return (
           <Card>
