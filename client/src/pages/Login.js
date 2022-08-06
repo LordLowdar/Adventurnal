@@ -32,12 +32,13 @@ export default function LoginPage() {
           'characters',
           JSON.stringify(data.login.user.characters)
         );
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
+        window.location.assign('/roster');
       }
     }
   };
   return (
-    <Container>
+    <Container sx={{ minHeight: '100vh' }}>
       <Card>
         <Typography variant="h6">Login</Typography>
         <TextField
