@@ -38,7 +38,7 @@ export default function LoginPage() {
     }
   };
   return (
-    <Container>
+    <Container sx={{ minHeight: '100vh' }}>
       <Card>
         <Typography variant="h6">Login</Typography>
         <TextField

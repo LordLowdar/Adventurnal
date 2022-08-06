@@ -21,23 +21,61 @@ import '../App.css';
 
 const Home = () => {
   return (
-    <Container sx={{ flexDirection: 'column', justifyContent: 'center' }}>
+    <Container
+      disableGutters={true}
+      sx={{
+        minWidth: '100%',
+        minHeight: '100vh',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
       <Particles></Particles>
-      <Card sx={{ marginTop: '1%' }}>
+      <Card
+        sx={{ background: 'none', borderRadius: '0', position: 'relative' }}
+      >
         <CardMedia
+          sx={{ background: '#BEBEBE80' }}
           component="img"
-          maxHeight="200"
           image="../public/images/Adventurnal Logo With Text.svg"
           alt="Badly placed logo"
         />
+        <div style={{ position: 'relative' }}>
+          <div class="custom-shape-divider-top-1659224291">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M1200 0L0 0 598.97 114.72 1200 0z"
+                class="shape-fill"
+              ></path>
+            </svg>
+          </div>
+        </div>
         <CardContent>
-          <Typography variant="h5" compontnt="div">
+          <Typography
+            variant="h5"
+            compontnt="div"
+            color="lightGrey"
+            sx={{ filter: 'drop-shadow(5px 5px 4px #000000)' }}
+          >
             WELCOME TO ADVENTURNAL
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography
+            variant="body1"
+            color="lightGrey"
+            sx={{ filter: 'drop-shadow(5px 5px 4px #000000)' }}
+          >
             your tabletop campaign journal, upgraded.
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="lightGrey"
+            sx={{ filter: 'drop-shadow(5px 5px 4px #000000)' }}
+          >
             We aim to provide a location for all your record keeping, helping
             you manage your characters. Keep a personal account of your sessions
             for you to refer in the downtime between sessions. Log details about
@@ -51,7 +89,9 @@ const Home = () => {
             size="small"
             color="primary"
           >
-            Join Now!
+            <Typography variant="h7" color="gold">
+              Join Now!
+            </Typography>
           </Button>
         </CardActions>
       </Card>

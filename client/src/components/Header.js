@@ -11,17 +11,23 @@ import {
 const Header = (props) => {
   if (Auth.loggedIn())
     return (
-      <AppBar sx={{ backgroundColor: 'green', m: 0 }} position="static">
+      <AppBar sx={{ backgroundColor: '#591C14', m: 0 }} position="static">
         <Toolbar sx={{ justifyContent: 'space-evenly' }}>
           <IconButton component={RouterLink} to="/">
             <img src="..\public\images\Adventurnal Logo.svg" />
-            <Typography variant="h5">ADVENTURNAL</Typography>
+            <Typography sx={{ color: '#C1A84F' }} variant="h5">
+              ADVENTURNAL
+            </Typography>
           </IconButton>
           <nav style={{ marginLeft: 'auto', marginRight: '5%' }}>
-            <IconButton component={RouterLink} to="/roster">
+            <IconButton
+              component={RouterLink}
+              to="/roster"
+              sx={{ color: '#C1A84F' }}
+            >
               <Typography variant="h6">Characters</Typography>
             </IconButton>
-            <IconButton onClick={() => Auth.logout()}>
+            <IconButton onClick={() => Auth.logout()} sx={{ color: '#C1A84F' }}>
               <Typography variant="h6">Logout</Typography>
             </IconButton>
           </nav>
@@ -30,17 +36,32 @@ const Header = (props) => {
     );
   else {
     return (
-      <AppBar sx={{ backgroundColor: 'green' }} position="static">
+      <AppBar
+        sx={{
+          backgroundColor: '#491C14',
+          position: 'fixed',
+        }}
+      >
         <Toolbar sx={{ justifyContent: 'space-evenly' }}>
           <IconButton component={RouterLink} to="/">
             <img src="..\public\images\Adventurnal Logo.svg" />
-            <Typography variant="h5">ADVENTURNAL</Typography>
+            <Typography sx={{ color: '#C1A84F' }} variant="h5">
+              ADVENTURNAL
+            </Typography>
           </IconButton>
           <nav style={{ marginLeft: 'auto', marginRight: '5%' }}>
-            <IconButton component={RouterLink} to="/login">
+            <IconButton
+              component={RouterLink}
+              to="/login"
+              sx={{ color: '#C1A84F' }}
+            >
               <Typography variant="h6">Login</Typography>
             </IconButton>
-            <IconButton component={RouterLink} to="/signup">
+            <IconButton
+              component={RouterLink}
+              to="/signup"
+              sx={{ color: '#C1A84F' }}
+            >
               <Typography variant="h6">Signup</Typography>
             </IconButton>
           </nav>

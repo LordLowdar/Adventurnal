@@ -1,0 +1,25 @@
+
+body{
+    margin: 0;
+    padding-top: 65px;
+    background-color: #000000;
+  }
+  .custom-shape-divider-top-1659224291 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1659224291 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 87px;
+}
+
+.custom-shape-divider-top-1659224291 .shape-fill {
+    fill: #BEBEBE80;
+}

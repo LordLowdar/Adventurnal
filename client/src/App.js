@@ -17,6 +17,7 @@ import './App.css';
 import { setContext } from '@apollo/client/link/context';
 import { Provider } from 'react-redux';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
@@ -57,6 +58,7 @@ export default function App() {
           <Route exact path="/particleAccelerator" element={<Particles />} />
           <Route path="/*" element={<NoMatch />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ApolloProvider>
   );

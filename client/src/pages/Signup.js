@@ -1,16 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate, useLocation, Navigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import { ADD_USER } from "../utils/mutations";
+import React, { useState } from 'react';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
+import { ADD_USER } from '../utils/mutations';
+import { Container, Card, Button, Typography, TextField } from '@mui/material';
 
 export default function RegisterPage() {
   let navigate = useNavigate();
   let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  let from = location.state?.from?.pathname || '/';
   const [newCredentials, setCredentials] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [register, { error, data, loading }] = useMutation(ADD_USER);
   const onChange = (e) =>
@@ -27,7 +28,7 @@ export default function RegisterPage() {
         },
       });
       if (data.addUser.token) {
-        localStorage.setItem("id_token", data.addUser.token);
+        localStorage.setItem('id_token', data.addUser.token);
       }
       if (data.addUser.user._id) {
         navigate(from, { replace: true });
@@ -35,9 +36,9 @@ export default function RegisterPage() {
     }
   };
   return (
-    <div className="base">
-      <div className="loginHeader">Register</div>
-      <div className="content">
+    <Container sx={{ minHeight: '100vh' }}>
+      <Typography sx={{ color: 'lightGrey' }}>Register</Typography>
+      <Card>
         <div className="form">
           <div className="form-group">
             <label className="usernameTitle" htmlFor="email">
@@ -64,12 +65,10 @@ export default function RegisterPage() {
             />
           </div>
         </div>
-      </div>
-      <div className="loginFooter">
-        <button type="submit" onClick={registration} className="btn">
+        <Button type="submit" onClick={registration} className="btn">
           Register
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Card>
+    </Container>
   );
 }
